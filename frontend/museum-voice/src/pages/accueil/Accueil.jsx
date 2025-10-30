@@ -8,17 +8,19 @@ import GenParcours from '../../components/gen_parcours/GenParcours';
 
 const Accueil = () => {
   return (
-    <>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
       <Header />
       <WelcomeMsg />
       <LangSelector />
-      <WelcomeBgImg 
-        imageUrl="/assets/images/testmuseum.png" 
-        altText="Museum Welcome Background" 
-      />
+      <div style={{ flex: 1 }}>
+        <WelcomeBgImg
+          imageUrl="/assets/images/testmuseum.png"
+          altText="Museum Welcome Background"
+        />
+      </div>
       <StartMsg />
       <GenParcours onClick={() => alert('Parcours généré!')} />
-    </>
+    </div>
   );
 };
 

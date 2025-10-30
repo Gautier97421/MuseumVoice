@@ -5,7 +5,7 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "32px",
+    marginTop: "5px",
     padding: "0 16px",
   },
   headline: {
@@ -13,7 +13,7 @@ const styles = {
     color: "#fff",
     fontWeight: "bold",
     padding: "8px 24px",
-    marginBottom: "16px",
+    marginBottom: "6px",
     letterSpacing: "1px",
     fontFamily: "serif",
     maxWidth: "82vw", 
