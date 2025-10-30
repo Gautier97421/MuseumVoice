@@ -6,16 +6,20 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     marginTop: "32px",
+    padding: "0 16px",
   },
   headline: {
     background: "#0a0a2a",
     color: "#fff",
     fontWeight: "bold",
-    fontSize: "2rem",
     padding: "8px 24px",
     marginBottom: "16px",
     letterSpacing: "1px",
     fontFamily: "serif",
+    maxWidth: "82vw", 
+    textAlign: "center",
+    display: "inline-block",
+    transformOrigin: "center",
   },
   subline: {
     background: "#0a0a2a",
@@ -25,13 +29,22 @@ const styles = {
     marginBottom: "2px",
     fontFamily: "serif",
     width: "fit-content",
+    textAlign: "center",
   },
 };
 
 export default function StartMsg() {
   return (
     <div style={styles.container}>
-      <div style={styles.headline}>VOTRE VOYAGE COMMENCE ICI.</div>
+      <div
+        style={{
+          ...styles.headline,
+          fontSize: "clamp(1rem, 6vw, 2rem)", // ✅ scales with viewport
+        }}
+      >
+        VOTRE VOYAGE COMMENCE ICI.
+      </div>
+
       <div style={styles.subline}>
         Explorez, observez, ressentez — l’art se dévoile
       </div>
