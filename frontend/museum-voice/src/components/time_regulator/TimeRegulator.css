@@ -1,7 +1,6 @@
 /* Full-page centering */
 .time-page {
   width: 100vw;
-  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,62 +12,110 @@
   background-color: white;
   border: 1px solid #dcdcdc;
   border-radius: 10px;
-  padding: 20px 30px;
+  padding: 15px 25px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  text-align: center;
   font-family: "Poppins", sans-serif;
 }
 
-.time-container h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
+/* Title and display */
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.title-row h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
   color: #1c1c3b;
-  margin-bottom: 15px;
 }
 
 .time-display {
-  display: inline-block;
-  border: 2px solid #2fafff;
-  border-radius: 5px;
-  padding: 5px 15px;
+  border: 1.5px solid #2fafff;
+  border-radius: 6px;
+  padding: 4px 10px;
   color: #2fafff;
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 20px;
+  font-size: 1rem;
 }
 
-/* Slider styles */
+/* Slider wrapper */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Labels on top */
+.labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px; /* space between labels and slider */
+  padding: 0;
+  color: #1c1c3b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  position: relative;
+}
+
+/* Slider bar */
 .slider {
   width: 100%;
   appearance: none;
-  height: 8px;
+  height: 6px;
   border-radius: 5px;
-  background: #cce9ff;
+  background: linear-gradient(
+    to right,
+    #66c8ff 0%,
+    #66c8ff calc((var(--value, 3.5) / 5) * 100%),
+    #e7f6ff calc((var(--value, 3.5) / 5) * 100%),
+    #e7f6ff 100%
+  );
   outline: none;
-  opacity: 0.9;
-  transition: opacity 0.2s;
-}
-
-.slider:hover {
-  opacity: 1;
+  transition: background 0.3s;
+  z-index: 2;
+  position: relative;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
-  background: #2fafff;
+  background: #66c8ff;
   cursor: pointer;
+  border: none;
+  z-index: 3;
+  position: relative;
 }
 
-/* Label numbers */
-.labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  color: #333;
-  font-size: 0.9rem;
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.05);
+}
+
+/* Tick marks */
+.ticks {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 10px;
+  pointer-events: none;
+}
+
+.tick {
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  width: 2px;
+  height: 10px;
+  background: #1c1c3b;
+  border-radius: 2px;
+}
+
+.tick.half {
+  height: 6px;
+  background: #3e3e4b;
 }
