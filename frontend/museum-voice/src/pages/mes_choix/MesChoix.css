@@ -1,0 +1,22 @@
+/* MesChoix.css */
+
+/* Container setup */
+.mes-choix-container {
+  width: 100vw;              /* Always match viewport width */
+  max-width: 100vw;          /* Prevent going beyond viewport width */
+  overflow-x: hidden;        /* Hide any horizontal overflow */
+  padding: 20px;
+  margin: 0 auto;            /* Center content horizontally */
+  box-sizing: border-box;    /* Include padding in width calculations */
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Center all inner components */
+  gap: 20px;                 /* Add space between components */
+}
+
+/* Optional: ensure all direct children stay inside width */
+.mes-choix-container > * {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}

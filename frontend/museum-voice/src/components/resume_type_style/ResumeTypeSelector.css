@@ -3,7 +3,7 @@
 /* Container pour l'ensemble du composant (simule l'encadrement noir) */
 .resume-selector-container {
   width: auto; /* Taille pour simuler un composant mobile ou une carte */
-  margin: 20px auto; 
+  margin: 5px auto; 
   font-family: Arial, sans-serif; 
   /* Cadre noir/bleu très foncé */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);

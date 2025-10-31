@@ -3,7 +3,7 @@
 /* --- Conteneur Principal --- */
 .movement-selector-container {
   width: 100vw; /* Taille pour l'affichage mobile/carte */
-  margin: 20px auto; 
+  margin: 5px auto; 
   font-family: Arial, sans-serif; 
   border: 1px solid #000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
