@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TimeRegulator.css";
 
 export default function TimeRegulator() {
   const [value, setValue] = useState(0);
 
+  // On mount: load saved value from localStorage
+  useEffect(() => {
+    const savedValue = localStorage.getItem("timeSliderValue");
+    if (savedValue !== null) {
+      const val = parseFloat(savedValue);
+      setValue(val);
+      document.documentElement.style.setProperty("--value", val);
+    }
+  }, []);
+
+  // Whenever slider changes: save to localStorage
   const handleChange = (e) => {
     const val = parseFloat(e.target.value);
     setValue(val);
     e.target.style.setProperty("--value", val);
+    localStorage.setItem("timeSliderValue", val);
   };
 
+  // Format for H and minutes
   const formatTime = (val) => {
     const hours = Math.floor(val);
     const minutes = (val - hours) * 60;

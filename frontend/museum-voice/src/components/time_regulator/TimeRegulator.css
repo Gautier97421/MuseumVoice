@@ -101,7 +101,9 @@
 .ticks {
   position: absolute;
   top: 50%;
-  width: 100%;
+  /* fix: align perfectly with slider track */
+  width: calc(100% - 15px); /* subtract thumb width */
+  left: 7.5px; /* center the ticks within visible track area */
   height: 10px;
   pointer-events: none;
 }
