@@ -4,18 +4,15 @@ import "./TimeRegulator.css";
 export default function TimeRegulator({ onValueChange }) {
   const [value, setValue] = useState(0);
 
-  // Load from localStorage when mounted
+  // Load from localStorage once on mount
   useEffect(() => {
     const savedValue = localStorage.getItem("timeSliderValue");
     if (savedValue !== null) {
       const val = parseFloat(savedValue);
       setValue(val);
       document.documentElement.style.setProperty("--value", val);
-
-      // Notify parent on mount if needed
-      if (onValueChange) onValueChange(val);
     }
-  }, [onValueChange]);
+  }, []); // ✅ no dependency here
 
   // Whenever slider changes
   const handleChange = (e) => {

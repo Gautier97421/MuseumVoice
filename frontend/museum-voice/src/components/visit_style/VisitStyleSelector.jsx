@@ -1,4 +1,3 @@
-// VisitStyleSelector.jsx
 import React, { useState, useEffect } from 'react';
 import './VisitStyleSelector.css';
 import SelectorItem from '../common/SelectorItem';
@@ -16,12 +15,10 @@ const initialVisitStyles = [
 const VisitStyleSelector = ({ onStyleChange }) => {
   const [selectedStyle, setSelectedStyle] = useState('approfondi');
 
-  // Notify parent when the component mounts (default value)
   useEffect(() => {
     if (onStyleChange) onStyleChange(selectedStyle);
-  }, ); // run once on mount
+  }, ); 
 
-  // Handle click and send value upward
   const handleSelect = (id) => {
     setSelectedStyle(id);
     if (onStyleChange) onStyleChange(id);
