@@ -1,5 +1,5 @@
-// ArtMovementSelector.jsx
-import React, { useState } from 'react';
+// ThemeAndSeasonsSelector.jsx
+import React, { useState, useEffect } from 'react';
 import './ThemeAndSeasons.css';
 import SelectorGridItem from '../common/SelectorGridItem';
 
@@ -9,14 +9,18 @@ const initialArtMovements = [
   { id: 'renaissance', title: 'renaissance', style: 'renaissance', imageUrl: '/assets/images/testmuseum.png' },
 ];
 
-const ThemeAndSeasonsSelector = () => {
-  // ✅ Default to first movement so one is *always* selected
+const ThemeAndSeasonsSelector = ({ onSelectionChange }) => {
+  // Default to first movement
   const [selectedMovement, setSelectedMovement] = useState(initialArtMovements[0].id);
 
   const handleMovementClick = (movementId) => {
-    // ✅ Only change selection; never allow deselection
     setSelectedMovement(movementId);
   };
+
+  // Notify parent whenever selection changes
+  useEffect(() => {
+    if (onSelectionChange) onSelectionChange([selectedMovement]);
+  }, [selectedMovement, onSelectionChange]);
 
   return (
     <div className="movement-selector-container">
@@ -32,7 +36,6 @@ const ThemeAndSeasonsSelector = () => {
             title={movement.title}
             imageUrl={movement.imageUrl}
             textOverlay={movement.textOverlay}
-            // ✅ Only one can be selected
             isSelected={selectedMovement === movement.id}
             onClick={() => handleMovementClick(movement.id)}
           />

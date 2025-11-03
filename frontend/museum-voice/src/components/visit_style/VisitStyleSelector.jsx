@@ -1,5 +1,5 @@
 // VisitStyleSelector.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './VisitStyleSelector.css';
 import SelectorItem from '../common/SelectorItem';
 
@@ -13,8 +13,19 @@ const initialVisitStyles = [
   { id: 'thematique', title: 'Thématique', description: 'Parcours avec une cohérence narrative', icon: '⚙️' },
 ];
 
-const VisitStyleSelector = () => {
+const VisitStyleSelector = ({ onStyleChange }) => {
   const [selectedStyle, setSelectedStyle] = useState('approfondi');
+
+  // Notify parent when the component mounts (default value)
+  useEffect(() => {
+    if (onStyleChange) onStyleChange(selectedStyle);
+  }, ); // run once on mount
+
+  // Handle click and send value upward
+  const handleSelect = (id) => {
+    setSelectedStyle(id);
+    if (onStyleChange) onStyleChange(id);
+  };
 
   return (
     <div className="visit-selector-container">
@@ -30,7 +41,7 @@ const VisitStyleSelector = () => {
             title={style.title}
             description={style.description}
             isSelected={selectedStyle === style.id}
-            onClick={() => setSelectedStyle(style.id)}
+            onClick={() => handleSelect(style.id)}
           />
         ))}
       </div>

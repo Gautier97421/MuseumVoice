@@ -1,9 +1,8 @@
 // ArtMovementSelector.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ArtMovementSelector.css';
 import SelectorGridItem from '../common/SelectorGridItem';
 
-// Correction et ajustement de votre liste pour garantir des IDs uniques pour React
 const initialArtMovements = [
   { id: 'roman1', title: 'roman', style: 'roman', imageUrl: 'assets/images/testmuseum.png' }, 
   { id: 'gothique', title: 'gothique', style: 'gothique', imageUrl: '/assets/images/testmuseum.png' },
@@ -20,27 +19,36 @@ const initialArtMovements = [
   { id: 'classicisme_9', title: 'classicisme', style: 'classicisme', imageUrl: '/assets/images/testmuseum.png' },
 ];
 
-const ArtMovementSelector = () => {
-  // Changement crucial : selectedMovements est maintenant un tableau d'IDs
-  const [selectedMovements, setSelectedMovements] = useState([]);
+const ArtMovementSelector = ({ onSelectionChange }) => {
+  // Default: first movement selected
+  const [selectedMovements, setSelectedMovements] = useState([initialArtMovements[0].id]);
 
   const handleMovementClick = (movementId) => {
     setSelectedMovements(prevSelected => {
-      // Vérifie si l'ID est déjà dans le tableau
       if (prevSelected.includes(movementId)) {
-        // Si oui, le retire (désélectionne)
-        return prevSelected.filter(id => id !== movementId);
+        // Prevent deselecting the last one
+        if (prevSelected.length > 1) {
+          return prevSelected.filter(id => id !== movementId);
+        } else {
+          return prevSelected;
+        }
       } else {
-        // Si non, l'ajoute (sélectionne)
         return [...prevSelected, movementId];
       }
     });
   };
 
+  // Notify parent automatically on selection change
+  useEffect(() => {
+    if (onSelectionChange) {
+      onSelectionChange(selectedMovements);
+    }
+  }, [selectedMovements, onSelectionChange]);
+
   return (
     <div className="movement-selector-container">
       <div className="movement-selector-header">
-        Vos mouvements préférés?
+        Vos mouvements préférés ?
       </div>
       
       <div className="movement-selector-grid">
@@ -51,7 +59,6 @@ const ArtMovementSelector = () => {
             title={movement.title}
             imageUrl={movement.imageUrl}
             textOverlay={movement.textOverlay}
-            // Vérifie si l'ID est présent dans le tableau de sélection
             isSelected={selectedMovements.includes(movement.id)}
             onClick={() => handleMovementClick(movement.id)}
           />

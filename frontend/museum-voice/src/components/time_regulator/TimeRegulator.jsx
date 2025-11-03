@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "./TimeRegulator.css";
 
-export default function TimeRegulator() {
+export default function TimeRegulator({ onValueChange }) {
   const [value, setValue] = useState(0);
 
-  // On mount: load saved value from localStorage
+  // Load from localStorage when mounted
   useEffect(() => {
     const savedValue = localStorage.getItem("timeSliderValue");
     if (savedValue !== null) {
       const val = parseFloat(savedValue);
       setValue(val);
       document.documentElement.style.setProperty("--value", val);
-    }
-  }, []);
 
-  // Whenever slider changes: save to localStorage
+      // Notify parent on mount if needed
+      if (onValueChange) onValueChange(val);
+    }
+  }, [onValueChange]);
+
+  // Whenever slider changes
   const handleChange = (e) => {
     const val = parseFloat(e.target.value);
     setValue(val);
     e.target.style.setProperty("--value", val);
     localStorage.setItem("timeSliderValue", val);
+
+    // 👉 Send new value to parent
+    if (onValueChange) onValueChange(val);
   };
 
-  // Format for H and minutes
   const formatTime = (val) => {
     const hours = Math.floor(val);
     const minutes = (val - hours) * 60;
@@ -35,7 +40,7 @@ export default function TimeRegulator() {
     <div className="time-page">
       <div className="time-container">
         <div className="title-row">
-          <h3>Combien de temps avez vous?</h3>
+          <h3>Combien de temps avez-vous ?</h3>
           <div className="time-display">{formatTime(value)}</div>
         </div>
 
@@ -63,7 +68,7 @@ export default function TimeRegulator() {
 
           <div className="ticks">
             {ticks.map((val, i) => {
-              const percent = (val / 5) * 100; // min=0, max=5
+              const percent = (val / 5) * 100;
               return (
                 <div
                   key={i}
