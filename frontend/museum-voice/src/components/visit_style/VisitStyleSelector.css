@@ -32,12 +32,10 @@
   transition: background-color 0.15s ease;
 }
 
-/* Remove border from the last item */
 .selector-list .style-item:last-child {
   border-bottom: none;
 }
 
-/* Hover effect (optional, but good for user experience) */
 .style-item:hover {
   background-color: #f4f4f4;
 }

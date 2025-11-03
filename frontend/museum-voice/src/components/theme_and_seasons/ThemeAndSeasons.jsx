@@ -3,29 +3,19 @@ import React, { useState } from 'react';
 import './ThemeAndSeasons.css';
 import SelectorGridItem from '../common/SelectorGridItem';
 
-// Correction et ajustement de votre liste pour garantir des IDs uniques pour React
 const initialArtMovements = [
   { id: 'roman1', title: 'roman', style: 'roman', imageUrl: 'assets/images/testmuseum.png' }, 
   { id: 'gothique', title: 'gothique', style: 'gothique', imageUrl: '/assets/images/testmuseum.png' },
   { id: 'renaissance', title: 'renaissance', style: 'renaissance', imageUrl: '/assets/images/testmuseum.png' },
- 
 ];
 
 const ThemeAndSeasonsSelector = () => {
-  // Changement crucial : selectedMovements est maintenant un tableau d'IDs
-  const [selectedMovements, setSelectedMovements] = useState([]);
+  // ✅ Default to first movement so one is *always* selected
+  const [selectedMovement, setSelectedMovement] = useState(initialArtMovements[0].id);
 
   const handleMovementClick = (movementId) => {
-    setSelectedMovements(prevSelected => {
-      // Vérifie si l'ID est déjà dans le tableau
-      if (prevSelected.includes(movementId)) {
-        // Si oui, le retire (désélectionne)
-        return prevSelected.filter(id => id !== movementId);
-      } else {
-        // Si non, l'ajoute (sélectionne)
-        return [...prevSelected, movementId];
-      }
-    });
+    // ✅ Only change selection; never allow deselection
+    setSelectedMovement(movementId);
   };
 
   return (
@@ -42,8 +32,8 @@ const ThemeAndSeasonsSelector = () => {
             title={movement.title}
             imageUrl={movement.imageUrl}
             textOverlay={movement.textOverlay}
-            // Vérifie si l'ID est présent dans le tableau de sélection
-            isSelected={selectedMovements.includes(movement.id)}
+            // ✅ Only one can be selected
+            isSelected={selectedMovement === movement.id}
             onClick={() => handleMovementClick(movement.id)}
           />
         ))}
