@@ -2,7 +2,7 @@
 .visit-selector-container {
   /* Set max-width to simulate the card-like appearance */
   max-width: 100vw; 
-  margin: 20px auto; 
+  margin: 0px auto; 
   /* Use a dark, elegant font if available, otherwise fallback to system font */
   font-family: Arial, sans-serif; 
   /* The entire component has a uniform look */

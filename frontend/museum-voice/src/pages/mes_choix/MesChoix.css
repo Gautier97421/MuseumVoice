@@ -1,22 +1,32 @@
 /* MesChoix.css */
 
-/* Container setup */
-.mes-choix-container {
-  width: 100vw;              /* Always match viewport width */
-  max-width: 100vw;          /* Prevent going beyond viewport width */
-  overflow-x: hidden;        /* Hide any horizontal overflow */
-  padding: 20px;
-  margin: 0 auto;            /* Center content horizontally */
-  box-sizing: border-box;    /* Include padding in width calculations */
-  display: flex;
-  flex-direction: column;
-  align-items: center;       /* Center all inner components */
-  gap: 20px;                 /* Add space between components */
+/* Prevent any horizontal overflow from this page */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-/* Optional: ensure all direct children stay inside width */
+/* Main container */
+.mes-choix-container {
+  width: 100vw;              
+  max-width: 100vw;
+  overflow-x: hidden;        
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;       
+  gap: 8px;                  
+}
+
+/* Ensure all children respect container width */
 .mes-choix-container > * {
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  overflow-x: hidden;        
 }
