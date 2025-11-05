@@ -63,7 +63,7 @@ const MesChoix = () => {
     console.log("📦 Sending payload to API:", payload);
 
     try {
-      const response = await fetch("http://localhost:8000/api/meschoix", {
+      const response = await fetch("http://127.0.0.1:8000/api/meschoix", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
