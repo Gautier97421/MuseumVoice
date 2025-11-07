@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Afficher une PNG</title>
+  <style>
+    /* centre l'image et la rend responsive */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #f6f6f6;
+    }
+    img {
+      max-width: 95%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+  </style>
+</head>
+<body>
+  <img src="/static/audioguidemusee_qr.png" alt="QR code pour accès musée" />
+</body>
+</html>
