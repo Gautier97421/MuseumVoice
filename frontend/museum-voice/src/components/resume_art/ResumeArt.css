@@ -59,7 +59,8 @@
   align-items: center;
   width: 40%;
   max-width: 250px;
-  margin-bottom: 8px; /* add spacing before progress bar */
+  margin-bottom: 8px;
+  /* add spacing before progress bar */
 }
 
 /*  PROGRESS BAR (below controls) */
@@ -80,10 +81,17 @@
 }
 
 /*  ICON STYLE */
-.icon {
+.resume-art-top-icons .icon {
   cursor: pointer;
   transition: transform 0.2s, color 0.3s;
   color: #ffffff;
+  font-size: 22px;
+}
+
+.icon {
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+  color: #060606;
   font-size: 22px;
 }
 
