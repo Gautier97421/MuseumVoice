@@ -2,7 +2,7 @@ import React from "react";
 import ResumeProgressBar from "../../components/resume_progress_bar/ResumeProgressBar";
 import ResumeArtWorkCard from "../../components/resume_art_work_card/ResumeArtWorkCard";
 import ResumeArt from "../../components/resume_art/ResumeArt";
-
+import "./Resume.css";
 const Resume = () => {
     return (
         <>

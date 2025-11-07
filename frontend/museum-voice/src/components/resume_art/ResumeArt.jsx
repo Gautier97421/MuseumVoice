@@ -11,11 +11,15 @@ const ResumeArt = () => {
       <div className="resume-art-image-wrapper">
         <ResumeArtImage />
         <ResumeArtTopIcons />
-      </div>
 
-      <div className="resume-art-controls-wrapper">
-        <ResumeArtProgress />
-        <ResumeArtControls />
+        {/* 🎵 Overlay that includes controls (then progress bar below) */}
+        <div className="resume-art-controls-overlay">
+          <ResumeArtControls />
+
+          <div className="resume-art-progress">
+            <div className="resume-progress-fill" style={{ width: "45%" }}></div>
+          </div>
+        </div>
       </div>
     </div>
   );

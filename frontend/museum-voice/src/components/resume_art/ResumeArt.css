@@ -1,3 +1,4 @@
+/* MAIN CONTAINER */
 .resume-art {
   width: 100%;
   max-width: 100vw;
@@ -9,21 +10,21 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* IMAGE WRAPPER */
 .resume-art-image-wrapper {
   position: relative;
   width: 100%;
 }
 
+/*  MAIN IMAGE */
 .resume-art-image {
-  width: 100vw;
+  width: 100%;
   height: 80vh;
-  max-height: 90vh; 
+  object-fit: cover;
   display: block;
-  object-fit: cover; 
-  border-bottom: 1px solid #ddd;
 }
 
-
+/*  TOP ICONS */
 .resume-art-top-icons {
   position: absolute;
   top: 10px;
@@ -33,52 +34,73 @@
   justify-content: space-between;
   color: white;
   font-size: 20px;
+  z-index: 3;
 }
 
-.resume-art-controls-wrapper {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px 0;
+/*  CONTROLS OVERLAY (BOTTOM BAR) */
+.resume-art-controls-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 8px 0;
+  backdrop-filter: blur(6px);
+  z-index: 4;
 }
 
+/* ⏯ CONTROL BUTTONS */
 .resume-art-controls {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 80%;
-  margin-top: 8px;
+  width: 40%;
+  max-width: 250px;
+  margin-bottom: 8px; /* add spacing before progress bar */
 }
 
-.icon {
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.icon:hover {
-  transform: scale(1.1);
-}
-
-.play-btn {
-  background-color: #0a0a2a;
-  color: white;
-  padding: 8px;
-  border-radius: 50%;
-  font-size: 16px;
-}
-
+/*  PROGRESS BAR (below controls) */
 .resume-art-progress {
-  width: 90%;
-  height: 4px;
-  background-color: #ccc;
-  border-radius: 5px;
-  margin-bottom: 6px;
-  position: relative;
+  width: 85%;
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 .resume-progress-fill {
   height: 100%;
+  width: 0;
   background-color: #0a0a2a;
-  border-radius: 5px;
+  border-radius: 50px;
+  transition: width 0.4s ease;
+}
+
+/*  ICON STYLE */
+.icon {
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+/* PLAY BUTTON */
+.play-btn {
+  background-color: #0a0a2a;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.play-btn:hover {
+  transform: scale(1.15);
 }
