@@ -6,18 +6,21 @@ const ResumeProgressBar = ({ completed, total, timeLeft }) => {
 
   return (
     <div className="resume-progress-container">
-      <div className="resume-progress-bar">
-        <div
-          className="resume-progress-fill"
-          style={{ width: `${percentage}%` }}
-        ></div>
+      <div className="resume-progress-row">
+        <div className="resume-progress-bar">
+          <div
+            className="resume-progress-fill"
+            style={{ width: `${percentage}%` }}
+          ></div>
+        </div>
+
+        <div className="resume-time-box">{timeLeft}</div>
       </div>
 
       <div className="resume-progress-info">
         <span className="resume-progress-text">
           Œuvre {completed} sur {total}
         </span>
-        <div className="resume-time-box">{timeLeft}</div>
       </div>
     </div>
   );
