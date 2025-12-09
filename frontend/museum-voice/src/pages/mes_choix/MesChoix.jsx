@@ -19,37 +19,37 @@ const MesChoix = () => {
   const [artMovements, setArtMovements] = useState([]);
   const [themes, setThemes] = useState([]);
 
-  // 🕒 From TimeRegulator
+  //  From TimeRegulator
   const handleTimeValueChange = useCallback((newValue) => {
     setTimeValue(newValue);
   }, []);
 
-  // 🎨 From VisitStyleSelector
+  //  From VisitStyleSelector
   const handleVisitStyleChange = useCallback((style) => {
     setVisitStyle(style);
   }, []);
 
-  // 💡 From InterestSelector
+  // From InterestSelector
   const handleInterestChange = useCallback((selectedInterests) => {
     setInterests(selectedInterests);
   }, []);
 
-  // 📝 From ResumeTypeSelector
+  //  From ResumeTypeSelector
   const handleResumeTypeChange = useCallback((type) => {
     setResumeType(type);
   }, []);
 
-  // 🏛️ From ArtMovementSelector
+  //  From ArtMovementSelector
   const handleArtMovementChange = useCallback((selectedMovements) => {
     setArtMovements(selectedMovements);
   }, []);
 
-  // 🌸 From ThemeAndSeasonsSelector
+  //  From ThemeAndSeasonsSelector
   const handleThemeChange = useCallback((selectedThemes) => {
     setThemes(selectedThemes);
   }, []);
 
-  // 🚀 Send data to FastAPI when button is clicked
+  //  Send data to FastAPI when button is clicked
   const handleSendData = async () => {
     const payload = {
       timeValue,
@@ -60,7 +60,7 @@ const MesChoix = () => {
       themes,
     };
 
-    console.log("📦 Sending payload to API:", payload);
+    console.log(" Sending payload to API:", payload);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/meschoix", {
@@ -74,11 +74,11 @@ const MesChoix = () => {
       if (!response.ok) throw new Error("❌ Failed to send data");
 
       const data = await response.json();
-      console.log("✅ Response from FastAPI:", data);
-      alert("✅ Vos choix ont été envoyés avec succès !");
+      console.log("✅Response from FastAPI:", data);
+      alert(" Vos choix ont été envoyés avec succès !");
     } catch (error) {
-      console.error("⚠️ Error sending data:", error);
-      alert("❌ Erreur lors de l'envoi des données !");
+      console.error(" Error sending data:", error);
+      alert("❌Erreur lors de l'envoi des données !");
     }
   };
 
@@ -86,43 +86,43 @@ const MesChoix = () => {
     <div className="mes-choix-container">
       <Header />
 
-      {/* 🕒 Temps */}
+      {/*  Temps */}
       <TimeRegulator onValueChange={handleTimeValueChange} />
       <p style={{ textAlign: "center" }}>
         Temps sélectionné : {timeValue} heures
       </p>
 
-      {/* 🎨 Style de visite */}
+      {/*  Style de visite */}
       <VisitStyleSelector onStyleChange={handleVisitStyleChange} />
       <p style={{ textAlign: "center" }}>
         Style de visite : {visitStyle || "Aucun sélectionné"}
       </p>
 
-      {/* 💡 Intérêts */}
+      {/*  Intérêts */}
       <InterestSelector onSelectionChange={handleInterestChange} />
       <p style={{ textAlign: "center" }}>
         Intérêts : {interests.join(', ') || "Aucun"}
       </p>
 
-      {/* 📝 Type de résumé */}
+      {/*  Type de résumé */}
       <ResumeTypeSelector onTypeChange={handleResumeTypeChange} />
       <p style={{ textAlign: "center" }}>
         Type de résumé : {resumeType || "Aucun sélectionné"}
       </p>
 
-      {/* 🏛️ Mouvements artistiques */}
+      {/*  Mouvements artistiques */}
       <ArtMovementSelector onSelectionChange={handleArtMovementChange} />
       <p style={{ textAlign: "center" }}>
         Mouvements : {artMovements.join(', ') || "Aucun"}
       </p>
 
-      {/* 🌸 Thèmes & Saisons */}
+      {/*  Thèmes & Saisons */}
       <ThemeAndSeasonsSelector onSelectionChange={handleThemeChange} />
       <p style={{ textAlign: "center" }}>
         Thèmes & Saisons : {themes.join(', ') || "Aucun"}
       </p>
 
-      {/* ✅ Send button */}
+      {/*  Send button */}
       <GenParcours onClick={handleSendData} />
 
       <InterestNotice />
