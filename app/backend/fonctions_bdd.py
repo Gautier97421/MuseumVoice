@@ -2,6 +2,7 @@
 from tables import Plans, Oeuvres, Entities, Points, Relations, Chunk, Criterias, Pregenerations, Oeuvre_Criterias, Generated_Guide, Criterias_Guide, Criterias_Pregeneration, QR_Code, Stats
 from sqlmodel import Session, select
 from typing import Optional, List
+from sqlalchemy import delete
 
 
 # fonctions create :
@@ -215,12 +216,20 @@ def delete_Criterias_Pregeneration(pregeneration_id: int, criteria_id: int, sess
     return True
 
 
-def delete_QR_Code(qr_code_id: int, session: Session) -> bool:
-    qr_code = session.get(QR_Code, qr_code_id)
-    if not qr_code:
-        return False
-    session.delete(qr_code)
+def delete_all_QR_Code(session: Session) -> bool:
+    # 1. Créer une instruction DELETE qui cible le modèle QR_Code.
+    #    L'instruction 'delete(QR_Code)' sans clause WHERE supprime toutes les lignes.
+    stmt = delete(QR_Code)
+
+    # 2. Exécuter l'instruction. session.execute() est utilisé pour les opérations DML (INSERT, UPDATE, DELETE).
+    result = session.execute(stmt)
+
+    # 3. Commiter la transaction pour rendre les changements permanents dans la base de données.
     session.commit()
+
+    # (Facultatif) Vous pouvez retourner le nombre de lignes supprimées si vous le souhaitez
+    # return result.rowcount
+
     return True
 
 
