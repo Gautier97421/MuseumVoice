@@ -158,5 +158,4 @@ def get_next_qr_code(session: Session = Depends(get_session)):
         return {"qr_code": next_qr_code.token}
 
     except Exception as e:
-        # Si vous utilisez un système de logging, il est mieux de logger l'erreur ici.
         return {"message": "Erreur lors de la récupération du QR code", "error": str(e)}
