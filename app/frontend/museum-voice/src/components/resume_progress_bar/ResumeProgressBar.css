@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Georgia", serif;
 }
 
 .resume-progress-row {
@@ -17,7 +16,8 @@
 }
 
 .resume-progress-bar {
-  flex: 1; /* ✅ fills all remaining space */
+  flex: 1;
+  /* ✅ fills all remaining space */
   height: 16px;
   background-color: transparent;
   border: 2px solid #0a0a2a;
@@ -40,9 +40,11 @@
   font-size: 1.6rem;
   background: transparent;
   color: #0a0a2a;
-  margin-left: 8px; /* slight breathing space */
+  margin-left: 8px;
+  /* slight breathing space */
   white-space: nowrap;
-  flex-shrink: 0; /* ✅ keeps fixed width */
+  flex-shrink: 0;
+  /* ✅ keeps fixed width */
 }
 
 .resume-progress-info {

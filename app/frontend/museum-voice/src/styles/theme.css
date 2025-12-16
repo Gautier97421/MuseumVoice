@@ -1,0 +1,33 @@
+:root {
+  /* Colors */
+  --color-primary: #001f3f;
+  /* Navy Blue */
+  --color-secondary: #5dace2;
+  /* Light Blue */
+  --color-text-main: #000000;
+  /* Black */
+  --color-text-light: #ffffff;
+  /* White */
+  --color-text-dark: #333333;
+  /* Dark Grey */
+  --color-text-muted: #555555;
+  /* Medium Grey */
+  --color-background-main: #ffffff;
+  /* White */
+  --color-background-dark: #000000;
+  /* Black */
+  --color-background-hover: #f4f4f4;
+  /* Light Grey */
+  --color-border-main: #000000;
+  /* Black */
+  --color-border-light: #dddddd;
+  /* Light Grey */
+  --color-shadow-main: rgba(0, 0, 0, 0.2);
+
+  /* Fonts */
+  --font-family-main: 'Georgia', serif;
+  --font-weight-title: 700;
+  /* Bold */
+  --font-weight-text: 400;
+  /* Normal */
+}

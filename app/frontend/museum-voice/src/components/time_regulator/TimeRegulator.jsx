@@ -2,36 +2,59 @@ import React, { useState, useEffect } from "react";
 import "./TimeRegulator.css";
 
 export default function TimeRegulator({ onValueChange }) {
-  const [value, setValue] = useState(0);
+  const minTime = 0.75; // 45 minutes
+  const maxTime = 3;    // 3 hours
+  const step = 0.25;    // 15 minutes
+
+  const [value, setValue] = useState(minTime);
 
   // Load from localStorage once on mount
   useEffect(() => {
     const savedValue = localStorage.getItem("timeSliderValue");
     if (savedValue !== null) {
-      const val = parseFloat(savedValue);
+      let val = parseFloat(savedValue);
+      // Ensure value is within new range
+      if (val < minTime) val = minTime;
+      if (val > maxTime) val = maxTime;
+
       setValue(val);
-      document.documentElement.style.setProperty("--value", val);
+      updateCssVariable(val);
+    } else {
+      // Initialize CSS variable with default
+      updateCssVariable(minTime);
     }
-  }, []); // ✅ no dependency here
+  }, []);
+
+  const updateCssVariable = (val) => {
+    // Calculate percentage for background gradient
+    const percent = ((val - minTime) / (maxTime - minTime)) * 100;
+    document.documentElement.style.setProperty("--percent", `${percent}%`);
+  };
 
   // Whenever slider changes
   const handleChange = (e) => {
     const val = parseFloat(e.target.value);
     setValue(val);
-    e.target.style.setProperty("--value", val);
+    updateCssVariable(val);
     localStorage.setItem("timeSliderValue", val);
 
-    // 👉 Send new value to parent
     if (onValueChange) onValueChange(val);
   };
 
   const formatTime = (val) => {
     const hours = Math.floor(val);
-    const minutes = (val - hours) * 60;
+    const minutes = Math.round((val - hours) * 60);
     return `${hours}H${minutes === 0 ? "00" : minutes}`;
   };
 
-  const ticks = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+  // Generate ticks for every step (15 mins)
+  const ticks = [];
+  for (let i = minTime; i <= maxTime; i += step) {
+    ticks.push(i);
+  }
+
+  // Generate labels (e.g., every hour)
+  const labels = [0.75, 1, 2, 3];
 
   return (
     <div className="time-page">
@@ -43,21 +66,24 @@ export default function TimeRegulator({ onValueChange }) {
 
         <div className="slider-wrapper">
           <div className="labels">
-            {[0, 1, 2, 3, 4, 5].map((val) => (
-              <span
-                key={val}
-                style={{ visibility: val === 0 ? "hidden" : "visible" }}
-              >
-                {val}H
-              </span>
-            ))}
+            {labels.map((val) => {
+              const percent = ((val - minTime) / (maxTime - minTime)) * 100;
+              return (
+                <span
+                  key={val}
+                  style={{ left: `${percent}%`, position: 'absolute', transform: 'translateX(-50%)' }}
+                >
+                  {val === 0.75 ? "45min" : `${val}H`}
+                </span>
+              );
+            })}
           </div>
 
           <input
             type="range"
-            min="0"
-            max="5"
-            step="0.5"
+            min={minTime}
+            max={maxTime}
+            step={step}
             value={value}
             onChange={handleChange}
             className="slider"
@@ -65,7 +91,7 @@ export default function TimeRegulator({ onValueChange }) {
 
           <div className="ticks">
             {ticks.map((val, i) => {
-              const percent = (val / 5) * 100;
+              const percent = ((val - minTime) / (maxTime - minTime)) * 100;
               return (
                 <div
                   key={i}

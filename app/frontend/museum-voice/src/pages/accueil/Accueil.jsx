@@ -18,26 +18,26 @@ const Accueil = () => {
     // Ici, vous pourriez implémenter la logique pour changer la langue
     // de toute l'application (par exemple, charger un fichier de traduction).
   }, [selectedLanguage]);
-  
+
   // Fonction de gestion du changement de langue
   const handleLanguageChange = (newLang) => {
     setSelectedLanguage(newLang);
   };
-  
+
   const navigate = useNavigate();
   const goToMesChoix = () => {
     // [Inference] Vous pourriez passer la langue sélectionnée au composant suivant si nécessaire
     // navigate('/mes-choix', { state: { lang: selectedLanguage } });
     navigate('/mes-choix');
   }
-  
+
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', overflowY: 'auto', paddingBottom: '130px' }}>
       <Header />
       <WelcomeMsg />
-      
+
       {/* 2. Intégrer le LangSelector avec l'état et le gestionnaire */}
-      <LangSelector 
+      <LangSelector
         currentLang={selectedLanguage}
         onSelectLang={handleLanguageChange}
       />
@@ -49,7 +49,7 @@ const Accueil = () => {
         />
       </div>
       <StartMsg />
-      <GenParcours onClick={goToMesChoix } />
+      <GenParcours onClick={goToMesChoix} />
     </div>
   );
 };

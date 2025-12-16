@@ -15,7 +15,6 @@
   padding: 15px 25px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  font-family: "Poppins", sans-serif;
 }
 
 /* Title and display */
@@ -53,12 +52,15 @@
 .labels {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px; /* space between labels and slider */
+  margin-bottom: 10px;
+  /* space between labels and slider */
   padding: 0;
   color: #1c1c3b;
   font-size: 0.9rem;
   font-weight: 500;
   position: relative;
+  height: 25px;
+  /* Ensure height for absolute children */
 }
 
 /* Slider bar */
@@ -67,13 +69,11 @@
   appearance: none;
   height: 6px;
   border-radius: 5px;
-  background: linear-gradient(
-    to right,
-    #66c8ff 0%,
-    #66c8ff calc((var(--value, 3.5) / 5) * 100%),
-    #e7f6ff calc((var(--value, 3.5) / 5) * 100%),
-    #e7f6ff 100%
-  );
+  background: linear-gradient(to right,
+      #66c8ff 0%,
+      #66c8ff var(--percent, 0%),
+      #e7f6ff var(--percent, 0%),
+      #e7f6ff 100%);
   outline: none;
   transition: background 0.3s;
   z-index: 2;
@@ -102,8 +102,10 @@
   position: absolute;
   top: 50%;
   /* fix: align perfectly with slider track */
-  width: calc(100% - 15px); /* subtract thumb width */
-  left: 7.5px; /* center the ticks within visible track area */
+  width: calc(100% - 15px);
+  /* subtract thumb width */
+  left: 7.5px;
+  /* center the ticks within visible track area */
   height: 10px;
   pointer-events: none;
 }

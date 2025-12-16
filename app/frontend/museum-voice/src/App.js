@@ -4,16 +4,18 @@ import Accueil from './pages/accueil/Accueil';
 import MesChoix from './pages/mes_choix/MesChoix';
 import Resume from './pages/resume/Resume';
 
+import BottomNav from './components/bottom_nav/BottomNav';
+
 function App() {
   return (
     <>
-      
       <Router>
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/mes-choix" element={<MesChoix />} />
           <Route path="/resume" element={<Resume />} />
         </Routes>
+        <BottomNav />
       </Router>
     </>
   );

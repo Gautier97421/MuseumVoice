@@ -5,7 +5,7 @@ import ResumeArt from "../../components/resume_art/ResumeArt";
 import "./Resume.css";
 const Resume = () => {
     return (
-        <>
+        <div style={{ paddingBottom: '130px' }}>
             <ResumeProgressBar completed={3} total={10} timeLeft={"05H 23"} > </ResumeProgressBar>
             <ResumeArt />
             <ResumeArtWorkCard
@@ -18,7 +18,7 @@ const Resume = () => {
 
 Il répondait simplement : “Le visage n’est pas caché, il est là derrière, bien sûr, mais visible ou non, c’est la même chose.”`}
             />
-        </>
+        </div>
     );
 };
 
