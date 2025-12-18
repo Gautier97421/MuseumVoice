@@ -4,6 +4,58 @@ import shutil
 import numpy as np
 import soundfile as sf
 from piper import PiperVoice
+import urllib.request
+
+dest_folder = "piper_windows_amd64/piper/voices_models"
+
+os.makedirs(dest_folder, exist_ok=True)
+
+models = [
+    {
+        "name": "fr_FR-siwis-medium",
+        "onnx": "https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx",
+        "json": "https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx.json",
+        "language" : "fr_FR"
+    },
+    # {
+    #     "name": "fr_FR-mls-medium",
+    #     "onnx": "https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/mls/medium/fr_FR-mls-medium.onnx",
+    #     "json": "https://huggingface.co/rhasspy/piper-voices/resolve/main/fr/fr_FR/mls/medium/fr_FR-mls-medium.onnx.json",
+    #     "language" : "fr_FR"
+    # },
+    {
+        "name": "en_US-ryan-high",
+        "onnx": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/high/en_US-ryan-high.onnx",
+        "json": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/ryan/high/en_US-ryan-high.onnx.json",
+        "language" : "en_US"
+    }
+]
+
+list_model_info = []
+
+for model in models:
+    lang_folder = os.path.join(dest_folder, model["language"])
+    os.makedirs(lang_folder, exist_ok=True) 
+    
+    model_path = os.path.join(dest_folder, model["language"], f"{model['name']}.onnx")
+    json_path = os.path.join(dest_folder, model["language"], f"{model['name']}.onnx.json")
+    
+    list_model_info.append({
+        "path": model_path,
+        "language": model["language"]
+    })
+
+    if not os.path.exists(model_path):
+        urllib.request.urlretrieve(model["onnx"], model_path)
+        print(f"✅ Modèle {model['name']} téléchargé !")
+    else:
+        print(f"ℹ️ Le modèle {model['name']} existe déjà.")
+
+    if not os.path.exists(json_path):
+        urllib.request.urlretrieve(model["json"], json_path)
+        print(f"✅ JSON {model['name']} téléchargé !")
+    else:
+        print(f"ℹ️ Le JSON {model['name']} existe déjà.")
 
 # ===== CONFIG =====
 #MODEL = r"piper_windows_amd64\piper\voices_models\fr_FR-mls-medium.onnx"
@@ -13,7 +65,14 @@ from piper import PiperVoice
 #MODEL = r"piper_windows_amd64\piper\voices_models\en_US-arctic-medium.onnx"
 #MODEL = r"piper_windows_amd64\piper\voices_models\tom1.onnx"
 #MODEL = r"piper_windows_amd64\piper\voices_models\tom2.onnx"
-MODEL = r"piper_windows_amd64\piper\voices_models\next.onnx"
+# MODEL = r"piper_windows_amd64\piper\voices_models\next.onnx"
+
+for info in list_model_info:
+    if info["language"] == "fr_FR":  # ou une variable qui contient le le choix de langue
+        path_model = info["path"]
+        break
+    
+MODEL = path_model # ou utiliser le chemin directement 
 TEXT_DIR = r"Parcours_txt"
 
 LENGTH_SCALE = 0.9
